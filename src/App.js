@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Form from "./components/Form";
+import CreateLinkForm from "./components/CreateLinkForm";
+import LinkList from "./components/LinkList";
+import { getLinks } from "./api";
 import "./App.css";
-import UrlList from "./components/UrlList";
-import { getLinks, removeLink } from "./api";
 
 function App() {
   const [links, setLinks] = useState([]);
 
   function handleRemove(slug) {
-    removeLink(slug);
     const updatedLinks = links.filter((link) => link.slug !== slug);
     setLinks(updatedLinks);
   }
@@ -26,8 +25,8 @@ function App() {
 
   return (
     <div className="app">
-      <Form onAddLink={handleAddLink} />
-      <UrlList links={links} onRemove={handleRemove} />
+      <CreateLinkForm onAddLink={handleAddLink} />
+      <LinkList links={links} onRemove={handleRemove} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { removeLink } from "../../api";
 import useApiError from "../../hooks/useApiError";
 
-function UrlList({ links, onRemove }) {
+function LinkList({ links, onRemove }) {
   const { handleApiCall } = useApiError();
 
   async function handleRemove(slug) {
@@ -34,4 +34,4 @@ function UrlList({ links, onRemove }) {
   );
 }
 
-export default UrlList;
+export default LinkList;

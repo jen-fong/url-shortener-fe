@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { createLink } from "../../api";
-import useApi from "../../hooks/useApiError";
+import useApiError from "../../hooks/useApiError";
 import "./index.css";
 
-function Form({ onAddLink }) {
+function CreateLinkForm({ onAddLink }) {
   const initialForm = {
     url: "",
     slug: "",
   };
   const [shortenedUrlForm, setShortenedUrlForm] = useState(initialForm);
-  const { errors, handleApiCall, setErrors } = useApi();
+  const { errors, handleApiCall, setErrors } = useApiError();
 
   function handleChange(e) {
     setShortenedUrlForm({
@@ -68,4 +68,4 @@ function Form({ onAddLink }) {
   );
 }
 
-export default Form;
+export default CreateLinkForm;
