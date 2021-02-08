@@ -30,9 +30,10 @@ function CreateLinkForm({ onAddLink }) {
       url,
     };
 
-    if (!slug) {
-      shortenedUrlForm.slug = slug;
+    if (slug) {
+      shortenedUrlData.slug = slug;
     }
+
     const data = await handleApiCall(() => createLink(shortenedUrlData));
     if (!data.error) {
       onAddLink(data);
