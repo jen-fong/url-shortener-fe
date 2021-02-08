@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   const [links, setLinks] = useState([]);
 
-  function handleRemove(slug) {
+  function handleLinkRemove(slug) {
     const updatedLinks = links.filter((link) => link.slug !== slug);
     setLinks(updatedLinks);
   }
@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="app">
       <CreateLinkForm onAddLink={handleAddLink} />
-      <LinkList links={links} onRemove={handleRemove} />
+      <LinkList links={links} onRemoveLink={handleLinkRemove} />
     </div>
   );
 }
