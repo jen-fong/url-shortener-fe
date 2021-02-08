@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Form from "./components/Form";
+import "./App.css";
+import UrlList from "./components/UrlList";
+import { getLinks, removeLink } from "./api";
 
 function App() {
+  const [links, setLinks] = useState([]);
+
+  function handleRemove(slug) {
+    removeLink(slug);
+    const updatedLinks = links.filter((link) => link.slug !== slug);
+    setLinks(updatedLinks);
+  }
+
+  async function handleAddLink(link) {
+    const updatedLinks = [link, ...links];
+    setLinks(updatedLinks);
+  }
+
+  useEffect(() => {
+    getLinks().then((res) => {
+      setLinks(res.data);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Form onAddLink={handleAddLink} />
+      <UrlList links={links} onRemove={handleRemove} />
     </div>
   );
 }
