@@ -7,6 +7,7 @@ function useApiError() {
   async function handleApiCall(api) {
     try {
       const res = await api();
+      setStatusCode(res.status);
       return res.data;
     } catch (err) {
       const { response } = err;
