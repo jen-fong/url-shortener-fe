@@ -19,7 +19,8 @@ function App() {
 
   useEffect(() => {
     getLinks().then((res) => {
-      setLinks(res.data);
+      const sortByRecentlyCreated = res.data.reverse();
+      setLinks(sortByRecentlyCreated);
     });
   }, []);
 

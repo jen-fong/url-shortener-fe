@@ -17,4 +17,4 @@ Then run:
 - You can remove saved links by clicking on the trash icon - would have been better to have a popup to confirm the remove instead of just removing it immediately when button is clicked
 
 ### Tests
-To run tests, run `npm test`. I added tests for the components as requested.
+To run tests, run `npm test -- --watchAll=false`.

@@ -4,7 +4,7 @@
   background-color: #ffffff;
   padding: 20px;
 
-  :nth-child(odd) {
+  &:nth-child(odd) {
     background-color: #f5f6f7;
   }
 
