@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import { createLink } from "../../api";
 import useApiError from "../../hooks/useApiError";
-import "./index.scss";
 import Button from "../Button";
+import "./index.scss";
 
 function CreateLinkForm({ onAddLink }) {
   const initialForm = {
@@ -57,6 +57,7 @@ function CreateLinkForm({ onAddLink }) {
           <label htmlFor="createLink">
             <span className="form-field__label">URL to shorten:</span>
             <input
+              data-testid="createLink"
               onChange={handleChange}
               name="url"
               value={shortenedUrlForm.url}
@@ -66,7 +67,7 @@ function CreateLinkForm({ onAddLink }) {
             />
           </label>
 
-          <div className="error-message">
+          <div className="error-message" data-testid="urlErrors">
             {errors && errors.url && errors.url.join(", ")}
           </div>
         </div>
@@ -79,6 +80,7 @@ function CreateLinkForm({ onAddLink }) {
           <label htmlFor="createSlug">
             <span className="form-field__label">Slug:</span>
             <input
+              data-testid="createSlug"
               onChange={handleChange}
               name="slug"
               value={shortenedUrlForm.slug}
@@ -88,7 +90,7 @@ function CreateLinkForm({ onAddLink }) {
             />
           </label>
 
-          <div className="error-message">
+          <div className="error-message" data-testid="slugErrors">
             {errors && errors.slug && errors.slug.join(", ")}
           </div>
         </div>

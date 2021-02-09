@@ -16,7 +16,7 @@ function LinkListItem({ link, onRemove }) {
   }
 
   return (
-    <li className="link-list-item">
+    <li className="link-list-item" data-testid="link-list-item">
       <div className="link-list-item__url-wrapper">
         <span className="link-list-item__full-url">{link.url}</span>
 

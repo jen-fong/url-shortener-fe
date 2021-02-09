@@ -3,17 +3,18 @@ import classNames from "classnames";
 
 import "./index.scss";
 
-function Button({ type, disabled, onChange, btnType, children }) {
+function Button({ type, disabled, onClick, btnType, children }) {
   return (
     <button
       // Open bug so disable the rule for now
       // eslint-disable-next-line react/button-has-type
-      type={type}
+      type={type || "submit"}
       className={classNames("btn", `btn--${btnType}`, {
         "btn--disabled": disabled,
       })}
-      onChange={onChange}
+      onClick={onClick}
       disabled={disabled}
+      data-testid="button"
     >
       {children}
     </button>
