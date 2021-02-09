@@ -6,12 +6,12 @@ describe("Links list", () => {
   it("displays a list of links", () => {
     const links = [
       {
-        short_url: "short.ly/test",
+        shortUrl: "short.ly/test",
         slug: "test",
         url: "test.com",
       },
       {
-        short_url: "short.ly/aaa",
+        shortUrl: "short.ly/aaa",
         slug: "aaa",
         url: "aaa.com",
       },

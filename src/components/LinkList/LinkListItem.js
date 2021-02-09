@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { removeLink } from "../../api";
 import useApiError from "../../hooks/useApiError";
 import Button from "../Button";
@@ -6,6 +7,7 @@ import Button from "../Button";
 import "./LinkListItem.scss";
 
 function LinkListItem({ link, onRemove }) {
+  const [isCopied, setIsCopied] = useState(false);
   const { handleApiCall } = useApiError();
 
   async function handleClick() {
@@ -15,6 +17,21 @@ function LinkListItem({ link, onRemove }) {
     onRemove(link.slug);
   }
 
+  function handleCopyClick() {
+    setIsCopied(true);
+  }
+
+  useEffect(() => {
+    let copyTimeout;
+    if (isCopied) {
+      copyTimeout = setTimeout(() => setIsCopied(false), 2000);
+    }
+
+    return () => {
+      clearTimeout(copyTimeout);
+    };
+  }, [isCopied]);
+
   return (
     <li className="link-list-item" data-testid="link-list-item">
       <div className="link-list-item__url-wrapper">
@@ -22,12 +39,29 @@ function LinkListItem({ link, onRemove }) {
 
         <div>
           <Button btnType="transparent" onClick={handleClick}>
-            <img className="icon" src="/images/trash.svg" alt="remove" />
+            <img className="remove-icon" src="/images/trash.svg" alt="remove" />
           </Button>
         </div>
       </div>
 
-      <span className="link-list-item__short-url">{link.short_url}</span>
+      <div>
+        <span className="link-list-item__short-url">{link.shortUrl}</span>
+
+        <span className="link-list-item__copy">
+          {isCopied ? (
+            "Copied!"
+          ) : (
+            <CopyToClipboard text={link.shortUrl} onCopy={handleCopyClick}>
+              <img
+                data-testid="copy-short-url"
+                className="icon-copy"
+                src="/images/copy.svg"
+                alt="copy"
+              />
+            </CopyToClipboard>
+          )}
+        </span>
+      </div>
     </li>
   );
 }

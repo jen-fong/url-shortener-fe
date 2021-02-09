@@ -31,11 +31,11 @@ function CreateLinkForm({ onAddLink }) {
     }
 
     const shortenedUrlData = {
-      url,
+      url: url.trim(),
     };
 
     if (slug) {
-      shortenedUrlData.slug = slug;
+      shortenedUrlData.slug = slug.trim();
     }
 
     const data = await handleApiCall(() => createLink(shortenedUrlData));

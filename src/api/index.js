@@ -1,4 +1,17 @@
 import axios from "axios";
+import camelizeKeys from "camelcase-keys";
+
+// convert all incoming json to camelcase
+// not necessary to do it for outgoing responses as of now
+axios.interceptors.response.use((response) => {
+  if (
+    response.data &&
+    response.headers["content-type"].includes("application/json")
+  ) {
+    response.data = camelizeKeys(response.data);
+  }
+  return response;
+});
 
 const baseURL = "https://api.bely.me";
 

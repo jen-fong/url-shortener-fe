@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import * as api from "../../../api";
 import LinkListItem from "../LinkListItem";
 
@@ -9,7 +9,7 @@ describe("LinkListItem", () => {
   beforeEach(() => {
     onRemoveLink = jest.fn();
     link = {
-      short_url: "short.ly/test",
+      shortUrl: "short.ly/test",
       slug: "test",
       url: "test.com",
     };
@@ -36,6 +36,39 @@ describe("LinkListItem", () => {
     await waitFor(() => {
       expect(api.removeLink).toHaveBeenCalledWith(link.slug);
       expect(onRemoveLink).toHaveBeenCalledWith(link.slug);
+    });
+  });
+
+  describe("copy", () => {
+    it("copies link and displays copied when user clicks copy icon", () => {
+      window.prompt = () => {};
+      const { queryByTestId } = render(
+        <LinkListItem link={link} onRemove={onRemoveLink} />
+      );
+
+      const copy = queryByTestId("copy-short-url");
+      fireEvent.click(copy);
+
+      expect(queryByTestId("copy-short-url")).not.toBeInTheDocument();
+    });
+
+    it("resets to copy icon after a set period of time", async () => {
+      jest.useFakeTimers();
+      window.prompt = () => {};
+      const { queryByTestId } = render(
+        <LinkListItem link={link} onRemove={onRemoveLink} />
+      );
+
+      const copy = queryByTestId("copy-short-url");
+      fireEvent.click(copy);
+
+      expect(queryByTestId("copy-short-url")).not.toBeInTheDocument();
+
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      expect(queryByTestId("copy-short-url")).toBeInTheDocument();
     });
   });
 });

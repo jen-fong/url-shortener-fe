@@ -18,7 +18,7 @@ describe("CreateLinkForm", () => {
     }
 
     it("displays the url in input and allows submit btn to be clicked", () => {
-      const { getByTestId } = render(<CreateLinkForm />);
+      const { getByTestId } = render(<CreateLinkForm onAddLink={onAddLink} />);
 
       const input = getByTestId("createLink");
       fireEvent.change(input, {
@@ -32,7 +32,7 @@ describe("CreateLinkForm", () => {
     });
 
     it("displays the slug in input and submit btn is disabled", () => {
-      const { getByTestId } = render(<CreateLinkForm />);
+      const { getByTestId } = render(<CreateLinkForm onAddLink={onAddLink} />);
 
       const input = getByTestId("createSlug");
       fireEvent.change(input, {
@@ -54,11 +54,9 @@ describe("CreateLinkForm", () => {
           },
         },
       };
-
       api.createLink = jest.fn(() =>
         Promise.reject(new TestApiError(apiError))
       );
-      const onAddLink = jest.fn();
       const { getByTestId } = render(<CreateLinkForm onAddLink={onAddLink} />);
 
       const urlInput = getByTestId("createLink");
@@ -81,7 +79,7 @@ describe("CreateLinkForm", () => {
   describe("submit", () => {
     const createReturnValue = {
       url: "http://blah.com",
-      short_url: "short.ly/blah",
+      shortUrl: "short.ly/blah",
       slug: "blah",
     };
 
@@ -94,7 +92,6 @@ describe("CreateLinkForm", () => {
     });
 
     it("submits form successfully when url is filled", async () => {
-      const onAddLink = jest.fn();
       const { getByTestId } = render(<CreateLinkForm onAddLink={onAddLink} />);
 
       const input = getByTestId("createLink");
@@ -111,7 +108,6 @@ describe("CreateLinkForm", () => {
     });
 
     it("submits form successfully when url and slug is filled", async () => {
-      const onAddLink = jest.fn();
       const { getByTestId } = render(<CreateLinkForm onAddLink={onAddLink} />);
 
       const urlInput = getByTestId("createLink");
