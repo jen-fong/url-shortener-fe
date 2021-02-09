@@ -25,8 +25,14 @@ function App() {
 
   return (
     <div className="app">
-      <CreateLinkForm onAddLink={handleAddLink} />
-      <LinkList links={links} onRemoveLink={handleLinkRemove} />
+      <header>
+        <h1>Url shortener</h1>
+      </header>
+
+      <main className="content">
+        <CreateLinkForm onAddLink={handleAddLink} />
+        <LinkList links={links} onRemoveLink={handleLinkRemove} />
+      </main>
     </div>
   );
 }

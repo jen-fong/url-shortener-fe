@@ -1,0 +1,20 @@
+.btn {
+  padding: 8px 15px;
+  border: none;
+  color: #ffffff;
+  border-radius: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background-color: #26acf2;
+}
+.btn--transparent {
+  background-color: transparent;
+}

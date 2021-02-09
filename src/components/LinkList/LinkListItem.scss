@@ -1,0 +1,32 @@
+.link-list-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.link-list-item:nth-child(odd) {
+  background-color: #f5f6f7;
+}
+
+.link-list-item__url-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  .btn--transparent {
+    padding: 4px 6px;
+  }
+}
+
+.link-list-item__full-url {
+  font-size: 24px;
+}
+
+.link-list-item__short-url {
+  font-size: 16px;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+}
